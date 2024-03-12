@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
 import "./Weather.css";
 import axios from "axios";
+import BASE_URI from "../Constant/BaseUrl";
+import Navbar from "../Navbar/Navbar";
 
 const Weather = () => {
-  const [searchinput, setSearchinput] = useState({}); //Search Bar Inputs
+  //Search Bar Inputs
+  const [searchinput, setSearchinput] = useState({});
 
-  const [resultbody, setResultbody] = useState(false); //Display result body
+  //Display result body
+  const [resultbody, setResultbody] = useState(false);
+
+  //Main state for storing result
   const [result, setResult] = useState({
     main: [{}],
     weather: [{}],
-  }); //Search Bar Inputs
+  });
 
+  const token = sessionStorage.getItem("token");
   //Search inputs
   const searchInputHandler = (e) => {
     setSearchinput(e.target.value);
   };
-  // console.log(searchinput);
 
   //Search weather
   const searchWeather = (e) => {
@@ -25,7 +31,6 @@ const Weather = () => {
         `https://api.openweathermap.org/data/2.5/weather?&appid=92cfcf567578b9576ec31b2cdcda14a9&units=metric&q=${searchinput}`
       )
       .then((response) => {
-        // console.log(response.data);
         setResult(response.data);
         setResultbody(true);
       })
@@ -35,8 +40,7 @@ const Weather = () => {
       });
   };
 
-  //Fetching Current location weather
-
+  //Fetching Current  weather location
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -45,7 +49,6 @@ const Weather = () => {
             `https://api.openweathermap.org/data/2.5/weather?&appid=92cfcf567578b9576ec31b2cdcda14a9&units=metric&lat=${position.coords.latitude}&lon=${position.coords.longitude}`
           )
           .then((response) => {
-            // console.log(response.data);
             setResult(response.data);
             setResultbody(true);
           })
@@ -57,8 +60,27 @@ const Weather = () => {
     }
   }, []);
 
+  // location Save
+  const savedLocation = (e) => {
+    const location = [result.name];
+    console.log(location);
+    axios
+      .post(`${BASE_URI}/api/user/saved-location`, location, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <div>
+    <div >
+      <Navbar />
       <div className="weather-main-body">
         <div className="weather-sub-body">
           <form action="" className="weather-search-area">
@@ -116,6 +138,14 @@ const Weather = () => {
                 alt=""
                 className="result-humidity"
               />{" "}
+            </div>
+            <div className="weather-save-sec">
+              <img
+                src="/unsaved.png"
+                alt=""
+                className="weather-save-icon"
+                onClick={savedLocation}
+              />
             </div>
           </div>
         ) : (

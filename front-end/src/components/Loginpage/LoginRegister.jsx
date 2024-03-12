@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./LoginRegister.css";
 import axios from "axios";
 import BASE_URI from "../Constant/BaseUrl";
+import Navbar from "../Navbar/Navbar";
 
 const LoginRegister = () => {
   const [showPass, setShopass] = useState(true); //show hide
@@ -37,6 +38,7 @@ const LoginRegister = () => {
       .post(`${BASE_URI}/api/login`, logreginputs)
       .then((data) => {
         console.log(data);
+        sessionStorage.setItem("token", data.data.token);
       })
       .catch((err) => {
         console.log(err);
