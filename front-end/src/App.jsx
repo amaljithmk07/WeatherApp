@@ -10,8 +10,8 @@ function App() {
 
   return (
     <>
-      {/* <LoginRegister/> */}
-      <Weather />
+      <LoginRegister/>
+      {/* <Weather /> */}
     </>
   );
 }
