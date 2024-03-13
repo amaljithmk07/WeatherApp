@@ -4,6 +4,7 @@ const loginDB = require("../models/Loginschema");
 const registerDB = require("../models/Registerschema");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 Loginroutes.post("/", async (req, res) => {
   try {
@@ -40,7 +41,7 @@ Loginroutes.post("/", async (req, res) => {
         UserId: olduser._id,
         UserEmail: olduser.email,
       },
-      "this_should_be_secret",
+      process.env.SECRET_KEY,
       {
         expiresIn: "1hr",
       }
