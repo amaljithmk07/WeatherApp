@@ -9,9 +9,10 @@ require("dotenv").config();
 Loginroutes.post("/", async (req, res) => {
   try {
     //   console.log(req.body);
-
+    const lower_email = req.body.email.toLowerCase();
+    // console.log(lower_email);
     const olduser = await loginDB.findOne({
-      email: req.body.email,
+      email: lower_email,
     });
 
     if (!olduser) {
@@ -39,7 +40,7 @@ Loginroutes.post("/", async (req, res) => {
     const token = await jwt.sign(
       {
         UserId: olduser._id,
-        UserEmail: olduser.email,
+        UserEmail: olduser.lower_email,
       },
       process.env.SECRET_KEY,
       {

@@ -7,8 +7,9 @@ const bcrypt = require("bcryptjs");
 Registerroutes.post("/", async (req, res) => {
   try {
     console.log(req.body);
+    const lower_email = req.body.email.toLowerCase();
     const oldemail = await LoginDB.findOne({
-      email: req.body.email,
+      email: lower_email,
     });
 
     if (oldemail) {
@@ -33,7 +34,7 @@ Registerroutes.post("/", async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 12);
     console.log(hashedPassword);
     const log = {
-      email: req.body.email,
+      email: lower_email,
       password: hashedPassword,
     };
     const logResult = await LoginDB(log).save();

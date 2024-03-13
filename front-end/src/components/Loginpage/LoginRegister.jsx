@@ -52,6 +52,9 @@ const LoginRegister = () => {
       })
       .catch((err) => {
         console.log(err);
+        toast.error(err.response.data.message, {
+          position: "bottom-center",
+        });
       });
   };
 
@@ -73,6 +76,9 @@ const LoginRegister = () => {
       })
       .catch((err) => {
         console.log(err);
+        toast.error(err.response.data.message, {
+          position: "bottom-center",
+        });
       });
   };
 
