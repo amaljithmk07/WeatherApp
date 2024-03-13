@@ -3,8 +3,12 @@ import "./LoginRegister.css";
 import axios from "axios";
 import BASE_URI from "../Constant/BaseUrl";
 import Navbar from "../Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const LoginRegister = () => {
+  const navigate = useNavigate();
+
   const [showPass, setShopass] = useState(true); //show hide
 
   const [logreginputs, SeLogregInputs] = useState({}); //Login Inputs
@@ -39,6 +43,12 @@ const LoginRegister = () => {
       .then((data) => {
         console.log(data);
         sessionStorage.setItem("token", data.data.token);
+        toast.success("Login Successful", {
+          position: "bottom-center",
+        });
+        setTimeout(() => {
+          navigate("/home");
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -54,6 +64,12 @@ const LoginRegister = () => {
       .post(`${BASE_URI}/api/register`, logreginputs)
       .then((data) => {
         console.log(data);
+        toast.success("Register Successful", {
+          position: "bottom-center",
+        });
+        setTimeout(() => {
+          SetLogreg(true);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -62,6 +78,7 @@ const LoginRegister = () => {
 
   return (
     <div>
+      <Toaster />
       <div className="login-main-body">
         {logReg == true ? (
           //////////------Login Area

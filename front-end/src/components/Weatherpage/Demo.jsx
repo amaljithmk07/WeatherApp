@@ -5,53 +5,58 @@ import BASE_URI from "../Constant/BaseUrl";
 import Navbar from "../Navbar/Navbar";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { weatherresult } from "../../redux/reducer/Reducer";
 
-const Savedlocation = () => {
+const Demo = () => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
   const [result, setResult] = useState([]);
   const [locationlist, setLocationlist] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`${BASE_URI}/api/user/view-saved-location`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((data) => {
-        var locationdata = data.data.data;
-        Promise.all(
-          locationdata.map((location) =>
-            axios.get(
-              `https://api.openweathermap.org/data/2.5/weather?&appid=92cfcf567578b9576ec31b2cdcda14a9&units=metric&q=${location.location}`
+    useEffect(() => {
+      axios
+        .get(`${BASE_URI}/api/user/view-saved-location`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((data) => {
+          var locationdata = data.data.data;
+          Promise.all(
+            locationdata.map((location) =>
+              axios.get(
+                `https://api.openweathermap.org/data/2.5/weather?&appid=92cfcf567578b9576ec31b2cdcda14a9&units=metric&q=${location.location}`
+              )
             )
           )
-        )
-          .then((weatherResponses) => {
-            const newLocationList = weatherResponses.map(
-              (response) => response.data
-            );
-            setLocationlist(newLocationList);
-          })
-          .catch((err) => {
-            console.log(err);
-            // alert("enter valid city name");
-          });
-      })
-      .catch((err) => {
-        console.log(err.response.status);
-        if (err.response.status == 401) {
-          toast.error("Auth Failed", {
-            position: "bottom-center",
-          });
-          setTimeout(() => {
-            sessionStorage.clear();
-            navigate("/");
-          }, 2000);
-        }
-      });
-  }, []);
+            .then((weatherResponses) => {
+              const newLocationList = weatherResponses.map(
+                (response) => response.data
+              );
+              setLocationlist(newLocationList);
+            })
+            .catch((err) => {
+              console.log(err);
+              // alert("enter valid city name");
+            });
+        })
+        .catch((err) => {
+          console.log(err.response.status);
+          if (err.response.status == 401) {
+            toast.error("Auth Failed", {
+              position: "bottom-center",
+            });
+            setTimeout(() => {
+              sessionStorage.clear();
+              navigate("/");
+            }, 2000);
+          }
+        });
+    }, []);
+
+
+
   console.log(locationlist);
   return (
     <div>
@@ -94,4 +99,4 @@ const Savedlocation = () => {
   );
 };
 
-export default Savedlocation;
+export default Demo;

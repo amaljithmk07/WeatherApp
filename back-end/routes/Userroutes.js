@@ -4,7 +4,7 @@ const Userroutes = express.Router();
 const LocationDB = require("../models/Locationschema");
 
 //Location Save
-Userroutes.post("/saved-location", CheckAuth, async (req, res) => {
+Userroutes.post("/save-location", CheckAuth, async (req, res) => {
   try {
     const Data = req.body[0];
     // console.log(Data);
@@ -44,6 +44,8 @@ Userroutes.post("/saved-location", CheckAuth, async (req, res) => {
 
 //View Saved Location
 Userroutes.get("/view-saved-location", CheckAuth, async (req, res) => {
+  
+  // console.log('ehgevheg');
   try {
     await LocationDB.find({
       login_id: req.userData.UserId,

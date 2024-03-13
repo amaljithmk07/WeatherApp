@@ -1,5 +1,5 @@
 .weather-main-body {
-  height: 95vh;
+  height: 100vh;
   width: 100%;
   /* background-color: red; */
 
@@ -19,7 +19,12 @@
   width: 400px;
   backdrop-filter: blur(1px);
   border-radius: 20px;
-  background-color: rgba(117, 1, 105, 0.537);
+  /* background-color: rgba(110, 2, 94, 0.916); */
+  background-color: #2b092a8a;
+  /* background-color: rgba(255, 255, 255, 0.362); */
+  border: 2px solid rgb(255, 167, 235);
+
+  /* background-color: rgba(87, 1, 78, 0.537); */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +37,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  /* background-color: white; */
+  background-color: #e8f0fe;
 }
 .weather-search-bar {
   width: 85%;
@@ -43,13 +49,15 @@
   text-align: center;
   text-transform: capitalize;
   font-size: 1.2rem;
+  background-color: #e8f0fe;
+
   /* background-color: rgb(242, 40, 40); */
 }
 .weather-search-bar:focus {
   outline: none;
 }
 .weather-search-area:focus-within {
-  outline: 3px solid rgb(175, 0, 119);
+  outline: 2px solid rgb(175, 0, 119);
 }
 .weather-search-icon {
   height: 70%;
@@ -60,7 +68,11 @@
   height: 300px;
   border-radius: 15px;
   width: 400px;
-  background-color: rgba(110, 2, 94, 0.916);
+  backdrop-filter: blur(5px);
+  background-color: #2b092a73;
+  border: 2px solid rgb(255, 167, 235);
+
+  /* background-color: rgba(110, 2, 94, 0.916); */
   display: flex;
   flex-direction: column;
   justify-content: center;

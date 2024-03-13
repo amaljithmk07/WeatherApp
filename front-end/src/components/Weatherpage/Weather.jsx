@@ -3,6 +3,7 @@ import "./Weather.css";
 import axios from "axios";
 import BASE_URI from "../Constant/BaseUrl";
 import Navbar from "../Navbar/Navbar";
+import toast, { Toaster } from "react-hot-toast";
 
 const Weather = () => {
   //Search Bar Inputs
@@ -33,6 +34,9 @@ const Weather = () => {
       .then((response) => {
         setResult(response.data);
         setResultbody(true);
+        toast.success("Data Retrieved successfull", {
+          position: "bottom-center",
+        });
       })
       .catch((err) => {
         console.log("err");
@@ -40,7 +44,7 @@ const Weather = () => {
       });
   };
 
-  //Fetching Current  weather location
+  // Fetching Current  weather location
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -61,26 +65,33 @@ const Weather = () => {
   }, []);
 
   // location Save
-  const savedLocation = (e) => {
+  const saveLocation = (e) => {
     const location = [result.name];
     console.log(location);
     axios
-      .post(`${BASE_URI}/api/user/saved-location`, location, {
+      .post(`${BASE_URI}/api/user/save-location`, location, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((data) => {
         console.log(data);
+        toast.success("Location Saved Successful", {
+          position: "bottom-center",
+        });
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Location Already saved", {
+          position: "bottom-center",
+        });
       });
   };
 
   return (
-    <div >
+    <div>
       <Navbar />
+      <Toaster />
       <div className="weather-main-body">
         <div className="weather-sub-body">
           <form action="" className="weather-search-area">
@@ -144,7 +155,7 @@ const Weather = () => {
                 src="/unsaved.png"
                 alt=""
                 className="weather-save-icon"
-                onClick={savedLocation}
+                onClick={saveLocation}
               />
             </div>
           </div>

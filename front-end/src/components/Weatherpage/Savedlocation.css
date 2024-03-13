@@ -9,19 +9,24 @@
   background-size: cover;
   object-fit: cover;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  row-gap: 10px;
-  flex-direction: column;
+  column-gap: 20px;
   align-items: center;
 }
 .saved-sub-body {
-  height: 150px;
-  width: 400px;
+  height: 200px;
+  width: 250px;
   backdrop-filter: blur(1px);
   border-radius: 20px;
-  background-color: rgba(117, 1, 105, 0.537);
+  background-color: rgb(59, 0, 53);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.saved-data{
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
