@@ -1,5 +1,5 @@
 .login-main-body {
-  min-height: 100vh;
+  min-height: 90vh;
   width: 100%;
   /* background-color: red; */
 
@@ -184,7 +184,7 @@
 }
 @media screen and (max-width:400px) {
 .login-sub-body{
-  width: 85%;
+  width: 82%;
 }
 
   

@@ -85,6 +85,7 @@ const LoginRegister = () => {
   return (
     <div>
       <Toaster />
+      <Navbar/>
       <div className="login-main-body">
         {logReg == true ? (
           //////////------Login Area

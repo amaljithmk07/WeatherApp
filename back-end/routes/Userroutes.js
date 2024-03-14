@@ -15,7 +15,7 @@ Userroutes.post("/save-location", CheckAuth, async (req, res) => {
       return res.status(400).json({
         succes: false,
         error: true,
-        message: "Location already added",
+        message: "Location Already Saved",
       });
     }
 

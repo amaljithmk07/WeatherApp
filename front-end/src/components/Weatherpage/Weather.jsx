@@ -82,7 +82,7 @@ const Weather = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Location Already saved", {
+        toast.error(err.response.data.message, {
           position: "bottom-center",
         });
       });
@@ -179,8 +179,13 @@ const Weather = () => {
                                             />
                                           </>
                                         ) : (
-                                          <></>
-                                        )}
+                                          <>
+                                          <img
+                                            src="/fog.png"
+                                            alt=""
+                                            className="result-icon"
+                                          />
+                                        </>                                        )}
                                       </>
                                     )}
                                   </>

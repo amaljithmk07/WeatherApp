@@ -1,6 +1,6 @@
 .navbar-main-body {
-  /* height: 10vh; */
-  height: 70px;
+  height: 10vh;
+  /* height: 70px; */
   width: 100%;
   display: flex;
   background-image: linear-gradient(to bottom, #e8a1cd, #e69acb);
@@ -154,5 +154,9 @@
     text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
+  }
+  .hamburger-menu-title-img {
+    height: 11px;
+    /* background-color: red; */
   }
 }
