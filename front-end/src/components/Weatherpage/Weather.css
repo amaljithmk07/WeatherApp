@@ -48,7 +48,7 @@
   font-weight: 600;
   text-align: center;
   text-transform: capitalize;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   background-color: #ffffff;
 
   /* background-color: rgb(242, 40, 40); */
@@ -68,7 +68,7 @@
   height: 300px;
   border-radius: 15px;
   width: 400px;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
   background-color: #2b092a73;
   border: 2px solid rgb(255, 167, 235);
 
@@ -88,7 +88,7 @@
   text-transform: capitalize;
   color: white;
 }
-.result-humidity {
+.weather-humidity-img {
   height: 23px;
   filter: invert(1);
 }
@@ -105,4 +105,42 @@
   height: 30px;
   cursor: pointer;
   filter: invert(1);
+}
+@media screen and (max-width: 700px) {
+  .weather-sub-body,
+  .weather-result-body {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 550px) {
+  .weather-sub-body {
+    width: 75%;
+    height: 120px;
+  }
+  .weather-search-bar{
+    font-size: .9rem;
+    width: 80%;
+    /* background-color: red; */
+  }
+  .weather-result-body {
+    width: 75%;
+    height: 250px;
+  }
+  .result-icon {
+    width: auto;
+    height: 80px;
+  }
+  .weather-data {
+    font-size: 1.35rem;
+  }
+  .weather-save-icon {
+    height: 25px;
+    width: auto;
+  }
+}
+@media screen and (max-width: 400px) {
+  .weather-sub-body,
+  .weather-result-body {
+    width: 85%;
+  }
 }

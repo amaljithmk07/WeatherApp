@@ -40,7 +40,7 @@ Loginroutes.post("/", async (req, res) => {
     const token = await jwt.sign(
       {
         UserId: olduser._id,
-        UserEmail: olduser.lower_email,
+        UserEmail: olduser.email,
       },
       process.env.SECRET_KEY,
       {

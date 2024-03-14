@@ -1,8 +1,8 @@
 .saved-main-body {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   /* background-color: red; */
-
+  padding: 30px 0;
   background-image: url("/public/background.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -12,6 +12,7 @@
   flex-wrap: wrap;
   justify-content: center;
   column-gap: 20px;
+  row-gap: 20px;
   align-items: center;
 }
 .saved-sub-body {
@@ -24,9 +25,83 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: all 0.1s ease-in-out;
 }
-.saved-data{
+.saved-sub-body:hover {
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.36);
+}
+.saved-result-icon {
+  height: 35%;
+  width: auto;
+}
+.saved-data {
   color: white;
+  /* background-color: cyan; */
+  display: flex;
+
+  column-gap: 5px;
   font-size: 1.2rem;
   font-weight: 700;
+}
+.saved-humidity-img {
+  height: 23px;
+  filter: invert(1);
+}
+.saved-data-delete {
+  display: flex;
+  height: auto;
+  width: 90%;
+  justify-content: flex-end;
+  align-items: flex-end;
+  /* background-color: red; */
+}
+.saved-delete-btn {
+  filter: invert(1);
+  height: 20px;
+  width: auto;
+  cursor: pointer;
+}
+.saved-no-data-sec{
+  color: rgb(0, 0, 0);
+  font-size: 1.8rem;
+  font-weight: 800;
+  height: 60vh;
+  width: 80%;
+  /* background-color: red; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  text-transform: uppercase;
+  text-align: center;
+  font-style: italic;
+}
+.saved-no-data-img{
+  max-height: 80%;
+  max-width: 90%;
+}
+@media screen and (max-width: 550px) {
+  .saved-sub-body {
+    height: 180px;
+    width: 200px;
+  }
+  .saved-delete-btn{
+    height: 25px;
+  }
+  .saved-result-icon{
+    height: 60px;
+    width: auto;
+  }
+  .saved-data{
+    font-size: .95rem;
+    /* background-color: red; */
+  }
+  .saved-humidity-img{
+    height: 20px;
+  }
+  .saved-no-data-sec{
+    font-size: 1.3rem;
+    /* background-color: red; */
+  }
+
 }

@@ -129,7 +129,67 @@ const Weather = () => {
                         <img src="/sun.png" alt="" className="result-icon" />
                       </>
                     ) : (
-                      <></>
+                      <>
+                        {result.weather[0]?.main == "Haze" ? (
+                          <>
+                            <img
+                              src="/haze.png"
+                              alt=""
+                              className="result-icon"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            {result.weather[0]?.main == "Sunny" ? (
+                              <>
+                                <img
+                                  src="/sunny.png"
+                                  alt=""
+                                  className="result-icon"
+                                />
+                              </>
+                            ) : (
+                              <>
+                                {result.weather[0]?.main == "Wind" ? (
+                                  <>
+                                    <img
+                                      src="/wind.png"
+                                      alt=""
+                                      className="result-icon"
+                                    />
+                                  </>
+                                ) : (
+                                  <>
+                                    {result.weather[0]?.main == "Storm" ? (
+                                      <>
+                                        <img
+                                          src="/storm.png"
+                                          alt=""
+                                          className="result-icon"
+                                        />
+                                      </>
+                                    ) : (
+                                      <>
+                                        {result.weather[0]?.main == "Fog" ? (
+                                          <>
+                                            <img
+                                              src="/fog.png"
+                                              alt=""
+                                              className="result-icon"
+                                            />
+                                          </>
+                                        ) : (
+                                          <></>
+                                        )}
+                                      </>
+                                    )}
+                                  </>
+                                )}
+                              </>
+                            )}
+                          </>
+                        )}
+                      </>
                     )}
                   </>
                 )}
@@ -147,7 +207,7 @@ const Weather = () => {
               <img
                 src="/humidity.png"
                 alt=""
-                className="result-humidity"
+                className="weather-humidity-img"
               />{" "}
             </div>
             <div className="weather-save-sec">

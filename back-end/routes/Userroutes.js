@@ -44,7 +44,6 @@ Userroutes.post("/save-location", CheckAuth, async (req, res) => {
 
 //View Saved Location
 Userroutes.get("/view-saved-location", CheckAuth, async (req, res) => {
-  
   // console.log('ehgevheg');
   try {
     await LocationDB.find({
@@ -63,6 +62,39 @@ Userroutes.get("/view-saved-location", CheckAuth, async (req, res) => {
           success: false,
           error: true,
           message: "Saved location view failed",
+          errormessage: err.message,
+        });
+      });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: true,
+      message: "Network Failed",
+      errormessage: err.message,
+    });
+  }
+});
+
+//Delete Location
+Userroutes.get("/delete-location/:name", CheckAuth, async (req, res) => {
+  // console.log('ehgevheg');
+  try {
+    await LocationDB.deleteOne({
+      location: req.params.name,
+      login_id: req.userData.UserId,
+    })
+      .then(() => {
+        res.status(200).json({
+          success: false,
+          error: true,
+          message: "deleted Successful",
+        });
+      })
+      .catch((err) => {
+        res.status(400).json({
+          success: false,
+          error: true,
+          message: "deleted failed",
           errormessage: err.message,
         });
       });
