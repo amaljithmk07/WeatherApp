@@ -5,20 +5,14 @@ WeatherHut is a dynamic web application developed using ReactJS for the frontend
 Features
 
 Display live location current weather.
-
 Ability to search weather updates from any place.
-
 Save frequently searched locations for easy access.
-
 User registration and login for enhanced security.
 
 
 Technologies Used
 
 Frontend: ReactJS
-
 Backend: Node.js
-
 Database: MongoDB
-
 API: OpenWeatherMap
