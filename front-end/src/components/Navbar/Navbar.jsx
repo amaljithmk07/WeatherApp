@@ -32,12 +32,21 @@ const Navbar = () => {
           <img src="/title.png" alt="" className="navbar-title" />
         </div>
         <div className="hamburger-sec">
-          <img
-            src="/hamburger.png"
-            alt=""
-            className="hamburger-img"
-            onClick={hamburger}
-          />
+          {hambruger !== true ? (
+            <img
+              src="/hamburger.png"
+              alt=""
+              className="hamburger-img"
+              onClick={hamburger}
+            />
+          ) : (
+            <img
+              src="/hamburger1.png"
+              alt=""
+              className="hamburger-img"
+              onClick={hamburger}
+            />
+          )}
           {hambruger == true ? (
             <>
               <div className="hamburger-menu-sec">

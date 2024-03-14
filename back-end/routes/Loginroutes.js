@@ -10,7 +10,7 @@ Loginroutes.post("/", async (req, res) => {
   try {
     //   console.log(req.body);
     const lower_email = req.body.email.toLowerCase();
-    // console.log(lower_email);
+    console.log(lower_email);
     const olduser = await loginDB.findOne({
       email: lower_email,
     });

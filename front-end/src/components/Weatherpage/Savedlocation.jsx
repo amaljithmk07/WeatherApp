@@ -185,7 +185,13 @@ const Savedlocation = () => {
                                                 />
                                               </>
                                             ) : (
-                                              <></>
+                                              <>
+                                                <img
+                                                  src="/fog.png"
+                                                  alt=""
+                                                  className="result-icon"
+                                                />
+                                              </>
                                             )}
                                           </>
                                         )}
