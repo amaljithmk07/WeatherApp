@@ -27,6 +27,14 @@ const Weather = () => {
   //Search weather
   const searchWeather = (e) => {
     e.preventDefault();
+
+    const place = document.forms["weatherForm"]["place"].value;
+    if (place == "") {
+      toast.error("Enter City Name", {
+        position: "bottom-center",
+      });
+      return false;
+    }
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?&appid=92cfcf567578b9576ec31b2cdcda14a9&units=metric&q=${searchinput}`
@@ -58,7 +66,7 @@ const Weather = () => {
           })
           .catch((err) => {
             alert("enter valid city name");
-            console.log("err");
+            console.log(err);
           });
       });
     }
@@ -94,7 +102,7 @@ const Weather = () => {
       <Toaster />
       <div className="weather-main-body">
         <div className="weather-sub-body">
-          <form action="" className="weather-search-area">
+          <form action="" className="weather-search-area" name="weatherForm">
             <input
               type="text"
               className="weather-search-bar"
@@ -180,12 +188,13 @@ const Weather = () => {
                                           </>
                                         ) : (
                                           <>
-                                          <img
-                                            src="/fog.png"
-                                            alt=""
-                                            className="result-icon"
-                                          />
-                                        </>                                        )}
+                                            <img
+                                              src="/fog.png"
+                                              alt=""
+                                              className="result-icon"
+                                            />
+                                          </>
+                                        )}
                                       </>
                                     )}
                                   </>

@@ -110,6 +110,8 @@
   height: 60%;
   cursor: pointer;
   width: auto;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media screen and (max-width: 550px) {
@@ -159,5 +161,8 @@
   .hamburger-menu-title-img {
     height: 11px;
     /* background-color: red; */
+
+    -webkit-tap-highlight-color: transparent;
+
   }
 }

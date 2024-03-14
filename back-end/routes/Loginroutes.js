@@ -47,18 +47,27 @@ Loginroutes.post("/", async (req, res) => {
         expiresIn: "1hr",
       }
     );
-
-    return res.status(200).json({
-      success: true,
-      error: false,
-      message: "Login Successful",
-      token: token,
-    });
+    if (token) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        message: "Login Successful",
+        token: token,
+      });
+    } else
+      (err) => {
+        return res.status(400).json({
+          success: false,
+          error: true,
+          message: "Login failed",
+          errormessage: err.message,
+        });
+      };
   } catch (err) {
-    return res.status(200).json({
+    return res.status(500).json({
       success: false,
       error: true,
-      message: "Login failed",
+      message: "Network Error",
       errormessage: err.message,
     });
   }

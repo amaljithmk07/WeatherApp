@@ -38,6 +38,23 @@ const LoginRegister = () => {
   const loginSubmit = (e) => {
     // console.log(e);
     e.preventDefault();
+
+    ///form validation
+
+    let email = document.forms["loginForm"]["email"].value;
+    let password = document.forms["loginForm"]["password"].value;
+    if (email == "") {
+      toast.error("Email is Empty", {
+        position: "bottom-center",
+      });
+      return false;
+    } else if (password == "") {
+      toast.error("Password is Empty", {
+        position: "bottom-center",
+      });
+      return false;
+    }
+
     axios
       .post(`${BASE_URI}/api/login`, logreginputs)
       .then((data) => {
@@ -63,6 +80,29 @@ const LoginRegister = () => {
   const RegisterSubmit = (e) => {
     // console.log(e);
     e.preventDefault();
+
+    ///form validation
+
+    let email = document.forms["registerForm"]["email"].value;
+    let password = document.forms["registerForm"]["password"].value;
+    let phone = document.forms["registerForm"]["phone"].value;
+    if (email == "") {
+      toast.error("Email is Empty", {
+        position: "bottom-center",
+      });
+      return false;
+    } else if (phone == "") {
+      toast.error("Phone is Empty", {
+        position: "bottom-center",
+      });
+      return false;
+    } else if (password == "") {
+      toast.error("Password is Empty", {
+        position: "bottom-center",
+      });
+      return false;
+    }
+
     axios
       .post(`${BASE_URI}/api/register`, logreginputs)
       .then((data) => {
@@ -85,14 +125,14 @@ const LoginRegister = () => {
   return (
     <div>
       <Toaster />
-      <Navbar/>
+      <Navbar />
       <div className="login-main-body">
         {logReg == true ? (
           //////////------Login Area
 
           <div className="login-sub-body">
             <div className="login-head">LOGIN</div>
-            <form action="" className="login-form-content">
+            <form action="" className="login-form-content" name="loginForm">
               <div className="login-input-sec">
                 <img src="/userlogin.png" alt="" className="login-icon" />
                 <input
@@ -145,7 +185,11 @@ const LoginRegister = () => {
 
           <div className="login-sub-body">
             <div className="login-head">REGISTER</div>
-            <form action="" className="register-form-content">
+            <form
+              action=""
+              className="register-form-content"
+              name="registerForm"
+            >
               <div className="register-input-sec">
                 <img src="/userlogin.png" alt="" className="login-icon" />
                 <input
