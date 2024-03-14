@@ -76,7 +76,7 @@ const Weather = () => {
       })
       .then((data) => {
         console.log(data);
-        toast.success("Location Saved Successful", {
+        toast.success("Location Saved", {
           position: "bottom-center",
         });
       })

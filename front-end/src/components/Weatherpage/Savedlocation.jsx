@@ -79,6 +79,9 @@ const Savedlocation = () => {
           return data.name != name;
         });
         setLocationlist(filterData);
+        toast.success("Location Unsaved", {
+          position: "bottom-center",
+        });
       })
       .catch((err) => {
         console.log(err);
