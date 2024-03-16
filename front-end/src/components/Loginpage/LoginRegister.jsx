@@ -17,9 +17,14 @@ const LoginRegister = () => {
 
   //Form change Section
 
-  const loginRegister = (e) => {
-    SetLogreg((prev) => !prev);
+  const loginregisterShowHandler = (e) => {
+    if (logReg == true) {
+      SetLogreg(false);
+    } else {
+      window.location.reload();
+    }
   };
+
   //Password hide and show
   const showPassword = () => {
     setShopass((prev) => !prev);
@@ -177,7 +182,10 @@ const LoginRegister = () => {
             </form>
             <div className="login-link-sec">
               Don't have an account?
-              <button onClick={loginRegister} className="loginregister-button">
+              <button
+                onClick={loginregisterShowHandler}
+                className="loginregister-button"
+              >
                 Register
               </button>
             </div>
@@ -244,7 +252,10 @@ const LoginRegister = () => {
             </form>
             <div className="login-link-sec">
               Sign into your account?{" "}
-              <button onClick={loginRegister} className="loginregister-button">
+              <button
+                onClick={loginregisterShowHandler}
+                className="loginregister-button"
+              >
                 Login
               </button>
             </div>
