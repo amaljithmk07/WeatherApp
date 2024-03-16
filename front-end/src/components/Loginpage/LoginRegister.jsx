@@ -110,8 +110,10 @@ const LoginRegister = () => {
         toast.success("Register Successful", {
           position: "bottom-center",
         });
+
         setTimeout(() => {
-          SetLogreg(true);
+          // SetLogreg(true);
+          window.location.reload();
         }, 1000);
       })
       .catch((err) => {
