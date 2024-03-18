@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { weatherresult } from "../../redux/reducer/Reducer";
+import Loading from "./Loading";
 
 const Savedlocation = () => {
   const navigate = useNavigate();
@@ -14,7 +15,10 @@ const Savedlocation = () => {
   const [result, setResult] = useState([]);
   const [locationlist, setLocationlist] = useState([]);
 
+  const [load, setLoad] = useState(false);
+
   useEffect(() => {
+    setLoad(true);
     axios
       .get(`${BASE_URI}/api/user/view-saved-location`, {
         headers: {
@@ -31,18 +35,23 @@ const Savedlocation = () => {
           )
         )
           .then((weatherResponses) => {
+            setLoad(false);
             const newLocationList = weatherResponses.map(
               (response) => response.data
             );
             setLocationlist(newLocationList);
           })
           .catch((err) => {
+            setLoad(false);
+
             console.log(err);
             // alert("enter valid city name");
           });
       })
       .catch((err) => {
         console.log(err.response.status);
+        setLoad(false);
+
         if (err.response.status == 401) {
           toast.error("Auth Failed", {
             position: "bottom-center",
@@ -94,6 +103,7 @@ const Savedlocation = () => {
       <Navbar />
       <Toaster />
       <div className="saved-main-body">
+        <Loading name={load} />
         {locationlist.length != 0 ? (
           <>
             {locationlist.map((data) => (
@@ -233,10 +243,20 @@ const Savedlocation = () => {
           </>
         ) : (
           <>
-            <div className="saved-no-data-sec">
-              NO DATA FOUND
-              <img src="/no-data.png" alt="" className="saved-no-data-img" />
-            </div>
+            {load == false ? (
+              <>
+                <div className="saved-no-data-sec">
+                  NO DATA FOUND
+                  <img
+                    src="/no-data.png"
+                    alt=""
+                    className="saved-no-data-img"
+                  />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
           </>
         )}
       </div>
