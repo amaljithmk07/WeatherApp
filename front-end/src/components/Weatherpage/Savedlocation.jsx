@@ -209,6 +209,15 @@ const Savedlocation = () => {
                 )}
 
                 <div className="saved-data"> {data.name}</div>
+                <div
+                  className="saved-data"
+                  style={{
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  {" "}
+                  {data.weather[0]?.main}
+                </div>
                 <div className="saved-data"> {data.main?.temp} &deg;C</div>
                 <div className="saved-data">
                   {" "}

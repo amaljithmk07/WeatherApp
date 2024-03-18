@@ -15,7 +15,7 @@
   align-items: center;
 }
 .saved-sub-body {
-  height: 200px;
+  height: 220px;
   width: 250px;
   backdrop-filter: blur(1px);
   border-radius: 20px;
@@ -69,6 +69,7 @@
   /* background-color: red; */
   display: flex;
   justify-content: flex-start;
+  row-gap: 20px;
   align-items: center;
   flex-direction: column;
   text-transform: uppercase;
@@ -77,7 +78,7 @@
 }
 .saved-no-data-img{
   max-height: 80%;
-  max-width: 90%;
+  max-width: 80%;
 }
 @media screen and (max-width: 800px) {
   .saved-main-body {
@@ -93,6 +94,7 @@
   .saved-sub-body {
     height: 180px;
     width: 200px;
+    padding: 0 0 10px 0;
   }
   .saved-delete-btn{
     height: 25px;
