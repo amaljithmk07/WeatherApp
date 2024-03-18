@@ -4,6 +4,7 @@ import axios from "axios";
 import BASE_URI from "../Constant/BaseUrl";
 import Navbar from "../Navbar/Navbar";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "./Loading";
 
 const Weather = () => {
   //Search Bar Inputs
@@ -11,6 +12,9 @@ const Weather = () => {
 
   //Display result body
   const [resultbody, setResultbody] = useState(false);
+
+  //Loader Props
+  const [load, setLoad] = useState(false);
 
   //Main state for storing result
   const [result, setResult] = useState({
@@ -54,6 +58,7 @@ const Weather = () => {
 
   // Fetching Current  weather location
   useEffect(() => {
+    setLoad(true);
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
         axios
@@ -61,6 +66,7 @@ const Weather = () => {
             `https://api.openweathermap.org/data/2.5/weather?&appid=92cfcf567578b9576ec31b2cdcda14a9&units=metric&lat=${position.coords.latitude}&lon=${position.coords.longitude}`
           )
           .then((response) => {
+            setLoad(false);
             setResult(response.data);
             setResultbody(true);
           })
@@ -101,98 +107,112 @@ const Weather = () => {
       <Navbar />
       <Toaster />
       <div className="weather-main-body">
-        <div className="weather-sub-body">
-          <form action="" className="weather-search-area" name="weatherForm">
-            <input
-              type="text"
-              className="weather-search-bar"
-              onChange={searchInputHandler}
-              placeholder="Enter city name"
-              name="place"
-            />
-            <img
-              src="search.png"
-              alt=""
-              className="weather-search-icon"
-              onClick={searchWeather}
-            />
-          </form>
-        </div>
-        {resultbody == true ? (
-          <div className="weather-result-body">
-            {result.weather[0]?.main == "Clouds" ? (
-              <>
-                <img src="/cloudy.png" alt="" className="result-icon" />
-              </>
-            ) : (
-              <>
-                {result.weather[0]?.main == "Rain" ? (
+        <Loading name={load} />
+        {load == false ? (
+          <>
+            <div className="weather-sub-body">
+              <form
+                action=""
+                className="weather-search-area"
+                name="weatherForm"
+              >
+                <input
+                  type="text"
+                  className="weather-search-bar"
+                  onChange={searchInputHandler}
+                  placeholder="Enter city name"
+                  name="place"
+                />
+                <img
+                  src="search.png"
+                  alt=""
+                  className="weather-search-icon"
+                  onClick={searchWeather}
+                />
+              </form>
+            </div>
+            {resultbody == true ? (
+              <div className="weather-result-body">
+                {result.weather[0]?.main == "Clouds" ? (
                   <>
-                    <img src="/rainy.png" alt="" className="result-icon" />
+                    <img src="/cloudy.png" alt="" className="result-icon" />
                   </>
                 ) : (
                   <>
-                    {result.weather[0]?.main == "Clear" ? (
+                    {result.weather[0]?.main == "Rain" ? (
                       <>
-                        <img src="/sun.png" alt="" className="result-icon" />
+                        <img src="/rainy.png" alt="" className="result-icon" />
                       </>
                     ) : (
                       <>
-                        {result.weather[0]?.main == "Haze" ? (
+                        {result.weather[0]?.main == "Clear" ? (
                           <>
                             <img
-                              src="/haze.png"
+                              src="/sun.png"
                               alt=""
                               className="result-icon"
                             />
                           </>
                         ) : (
                           <>
-                            {result.weather[0]?.main == "Sunny" ? (
+                            {result.weather[0]?.main == "Haze" ? (
                               <>
                                 <img
-                                  src="/sunny.png"
+                                  src="/haze.png"
                                   alt=""
                                   className="result-icon"
                                 />
                               </>
                             ) : (
                               <>
-                                {result.weather[0]?.main == "Wind" ? (
+                                {result.weather[0]?.main == "Sunny" ? (
                                   <>
                                     <img
-                                      src="/wind.png"
+                                      src="/sunny.png"
                                       alt=""
                                       className="result-icon"
                                     />
                                   </>
                                 ) : (
                                   <>
-                                    {result.weather[0]?.main == "Storm" ? (
+                                    {result.weather[0]?.main == "Wind" ? (
                                       <>
                                         <img
-                                          src="/storm.png"
+                                          src="/wind.png"
                                           alt=""
                                           className="result-icon"
                                         />
                                       </>
                                     ) : (
                                       <>
-                                        {result.weather[0]?.main == "Fog" ? (
+                                        {result.weather[0]?.main == "Storm" ? (
                                           <>
                                             <img
-                                              src="/fog.png"
+                                              src="/storm.png"
                                               alt=""
                                               className="result-icon"
                                             />
                                           </>
                                         ) : (
                                           <>
-                                            <img
-                                              src="/fog.png"
-                                              alt=""
-                                              className="result-icon"
-                                            />
+                                            {result.weather[0]?.main ==
+                                            "Fog" ? (
+                                              <>
+                                                <img
+                                                  src="/fog.png"
+                                                  alt=""
+                                                  className="result-icon"
+                                                />
+                                              </>
+                                            ) : (
+                                              <>
+                                                <img
+                                                  src="/fog.png"
+                                                  alt=""
+                                                  className="result-icon"
+                                                />
+                                              </>
+                                            )}
                                           </>
                                         )}
                                       </>
@@ -207,32 +227,34 @@ const Weather = () => {
                     )}
                   </>
                 )}
-              </>
-            )}
 
-            <div className="weather-data">{result.name}</div>
-            <div className="weather-data">
-              {" "}
-              {result.main.temp ? <>{result.main?.temp}&deg; C</> : <></>}
-            </div>
-            <div className="weather-data"> {result.weather[0]?.main}</div>
-            <div className="weather-data">
-              {result.main?.humidity}
-              <img
-                src="/humidity.png"
-                alt=""
-                className="weather-humidity-img"
-              />{" "}
-            </div>
-            <div className="weather-save-sec">
-              <img
-                src="/unsaved.png"
-                alt=""
-                className="weather-save-icon"
-                onClick={saveLocation}
-              />
-            </div>
-          </div>
+                <div className="weather-data">{result.name}</div>
+                <div className="weather-data">
+                  {" "}
+                  {result.main.temp ? <>{result.main?.temp}&deg; C</> : <></>}
+                </div>
+                <div className="weather-data"> {result.weather[0]?.main}</div>
+                <div className="weather-data">
+                  {result.main?.humidity}
+                  <img
+                    src="/humidity.png"
+                    alt=""
+                    className="weather-humidity-img"
+                  />{" "}
+                </div>
+                <div className="weather-save-sec">
+                  <img
+                    src="/unsaved.png"
+                    alt=""
+                    className="weather-save-icon"
+                    onClick={saveLocation}
+                  />
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+          </>
         ) : (
           <></>
         )}

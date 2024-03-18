@@ -112,7 +112,10 @@
   }
   .saved-no-data-sec{
     font-size: 1.3rem;
+    height: 40vh;
+
     /* background-color: red; */
+    /* justify-content: space-evenly; */
   }
   .saved-no-data-img{
     max-height: 60%;
