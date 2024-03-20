@@ -7,13 +7,14 @@ const Navbar = () => {
   const token = sessionStorage.getItem("token");
   const [hambruger, setHambruger] = useState(false);
   const navigate = useNavigate();
+
   const logout = () => {
-    sessionStorage.clear();
     toast.success("Logout Successful", {
       position: "bottom-center",
     });
     setTimeout(() => {
       navigate("/");
+      sessionStorage.clear();
     }, 1000);
   };
 
