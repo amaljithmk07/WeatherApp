@@ -107,7 +107,6 @@ const Weather = () => {
       <Navbar />
       <Toaster />
       <div className="weather-main-body">
-        <Loading name={load} />
         {load == false ? (
           <>
             <div className="weather-sub-body">
@@ -256,7 +255,9 @@ const Weather = () => {
             )}
           </>
         ) : (
-          <></>
+          <>
+            <Loading name={load} />
+          </>
         )}
       </div>
     </div>
