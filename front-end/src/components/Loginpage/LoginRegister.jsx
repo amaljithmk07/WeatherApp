@@ -91,6 +91,8 @@ const LoginRegister = () => {
     // console.log(e);
     e.preventDefault();
 
+    setLoad(true);
+
     ///form validation
 
     let email = document.forms["registerForm"]["email"].value;
@@ -122,8 +124,8 @@ const LoginRegister = () => {
         });
 
         setTimeout(() => {
-          // SetLogreg(true);
           window.location.reload();
+          setLoad(false);
         }, 1000);
       })
       .catch((err) => {

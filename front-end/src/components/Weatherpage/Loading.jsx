@@ -11,8 +11,8 @@ const Loading = (props) => {
         <>
           <div className="loading-main">
             <RotateLoader
-              color="#000000"
-              margin={3}
+              color="#1a0818"
+              margin={0}
               size={15}
               speedMultiplier={0.6}
             />{" "}
