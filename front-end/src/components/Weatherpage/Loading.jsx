@@ -13,7 +13,7 @@ const Loading = (props) => {
             <RotateLoader
               color="#000000"
               margin={3}
-              size={18}
+              size={15}
               speedMultiplier={0.6}
             />{" "}
           </div>

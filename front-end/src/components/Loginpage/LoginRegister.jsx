@@ -5,9 +5,12 @@ import BASE_URI from "../Constant/BaseUrl";
 import Navbar from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "../Weatherpage/Loading";
 
 const LoginRegister = () => {
   const navigate = useNavigate();
+
+  const [load, setLoad] = useState(false); //loading State
 
   const [showPass, setShopass] = useState(true); //show hide
 
@@ -45,7 +48,7 @@ const LoginRegister = () => {
     e.preventDefault();
 
     ///form validation
-
+    setLoad(true);
     let email = document.forms["loginForm"]["email"].value;
     let password = document.forms["loginForm"]["password"].value;
     if (email == "") {
@@ -68,7 +71,9 @@ const LoginRegister = () => {
         toast.success("Login Successful", {
           position: "bottom-center",
         });
+
         setTimeout(() => {
+          setLoad(false);
           navigate("/home");
         }, 1000);
       })
@@ -134,132 +139,143 @@ const LoginRegister = () => {
       <Toaster />
       <Navbar />
       <div className="login-main-body">
-        {logReg == true ? (
-          //////////------Login Area
-
-          <div className="login-sub-body">
-            <div className="login-head">LOGIN</div>
-            <form action="" className="login-form-content" name="loginForm">
-              <div className="login-input-sec">
-                <img src="/userlogin.png" alt="" className="login-icon" />
-                <input
-                  type="text"
-                  className="login-input"
-                  placeholder="Email"
-                  name="email"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="login-input-sec">
-                {showPass == true ? (
-                  <img
-                    src="/closed-eye-login.png"
-                    alt=""
-                    className="login-icon"
-                    onClick={showPassword}
-                  />
-                ) : (
-                  <img
-                    src="/open-eye-login.png"
-                    alt=""
-                    className="login-icon"
-                    onClick={showPassword}
-                  />
-                )}
-                <input
-                  type={showPass ? "password" : "text"}
-                  className="login-input"
-                  placeholder="Password"
-                  name="password"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="login-button-sec">
-                <button className="login-button" onClick={loginSubmit}>
-                  Submit
-                </button>
-              </div>
-            </form>
-            <div className="login-link-sec">
-              Don't have an account?
-              <button
-                onClick={loginregisterShowHandler}
-                className="loginregister-button"
-              >
-                Register
-              </button>
-            </div>
-          </div>
+        {load == true ? (
+          <>
+            <Loading name={load} />
+          </>
         ) : (
-          // /---------Register Area
+          <>
+            {logReg == true ? (
+              //////////------Login Area
 
-          <div className="login-sub-body">
-            <div className="login-head">REGISTER</div>
-            <form
-              action=""
-              className="register-form-content"
-              name="registerForm"
-            >
-              <div className="register-input-sec">
-                <img src="/userlogin.png" alt="" className="login-icon" />
-                <input
-                  type="text"
-                  className="register-input"
-                  placeholder="Email"
-                  name="email"
-                  onChange={inputHandler}
-                />
+              <div className="login-sub-body">
+                <div className="login-head">LOGIN</div>
+                <form action="" className="login-form-content" name="loginForm">
+                  <div className="login-input-sec">
+                    <img src="/userlogin.png" alt="" className="login-icon" />
+                    <input
+                      type="text"
+                      className="login-input"
+                      placeholder="Email"
+                      name="email"
+                      onChange={inputHandler}
+                    />
+                  </div>
+                  <div className="login-input-sec">
+                    {showPass == true ? (
+                      <img
+                        src="/closed-eye-login.png"
+                        alt=""
+                        className="login-icon"
+                        onClick={showPassword}
+                      />
+                    ) : (
+                      <img
+                        src="/open-eye-login.png"
+                        alt=""
+                        className="login-icon"
+                        onClick={showPassword}
+                      />
+                    )}
+                    <input
+                      type={showPass ? "password" : "text"}
+                      className="login-input"
+                      placeholder="Password"
+                      name="password"
+                      onChange={inputHandler}
+                    />
+                  </div>
+                  <div className="login-button-sec">
+                    <button className="login-button" onClick={loginSubmit}>
+                      Submit
+                    </button>
+                  </div>
+                </form>
+                <div className="login-link-sec">
+                  Don't have an account?
+                  <button
+                    onClick={loginregisterShowHandler}
+                    className="loginregister-button"
+                  >
+                    Register
+                  </button>
+                </div>
               </div>
-              <div className="register-input-sec">
-                <img src="/phone.png" alt="" className="login-icon" />
-                <input
-                  type="number"
-                  className="register-input"
-                  placeholder="Phone"
-                  name="phone"
-                  onChange={inputHandler}
-                />
+            ) : (
+              // /---------Register Area
+
+              <div className="login-sub-body">
+                <div className="login-head">REGISTER</div>
+                <form
+                  action=""
+                  className="register-form-content"
+                  name="registerForm"
+                >
+                  <div className="register-input-sec">
+                    <img src="/userlogin.png" alt="" className="login-icon" />
+                    <input
+                      type="text"
+                      className="register-input"
+                      placeholder="Email"
+                      name="email"
+                      onChange={inputHandler}
+                    />
+                  </div>
+                  <div className="register-input-sec">
+                    <img src="/phone.png" alt="" className="login-icon" />
+                    <input
+                      type="number"
+                      className="register-input"
+                      placeholder="Phone"
+                      name="phone"
+                      onChange={inputHandler}
+                    />
+                  </div>
+                  <div className="register-input-sec">
+                    {showPass == true ? (
+                      <img
+                        src="/closed-eye-login.png"
+                        alt=""
+                        className="login-icon"
+                        onClick={showPassword}
+                      />
+                    ) : (
+                      <img
+                        src="/open-eye-login.png"
+                        alt=""
+                        className="login-icon"
+                        onClick={showPassword}
+                      />
+                    )}
+                    <input
+                      type={showPass ? "password" : "text"}
+                      className="register-input"
+                      placeholder="Password"
+                      name="password"
+                      onChange={inputHandler}
+                    />
+                  </div>
+                  <div className="register-button-sec">
+                    <button
+                      className="register-button"
+                      onClick={RegisterSubmit}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+                <div className="login-link-sec">
+                  Sign into your account?{" "}
+                  <button
+                    onClick={loginregisterShowHandler}
+                    className="loginregister-button"
+                  >
+                    Login
+                  </button>
+                </div>
               </div>
-              <div className="register-input-sec">
-                {showPass == true ? (
-                  <img
-                    src="/closed-eye-login.png"
-                    alt=""
-                    className="login-icon"
-                    onClick={showPassword}
-                  />
-                ) : (
-                  <img
-                    src="/open-eye-login.png"
-                    alt=""
-                    className="login-icon"
-                    onClick={showPassword}
-                  />
-                )}
-                <input
-                  type={showPass ? "password" : "text"}
-                  className="register-input"
-                  placeholder="Password"
-                  name="password"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="register-button-sec">
-                <button className="register-button" onClick={RegisterSubmit}>
-                  Submit
-                </button>
-              </div>
-            </form>
-            <div className="login-link-sec">
-              Sign into your account?{" "}
-              <button
-                onClick={loginregisterShowHandler}
-                className="loginregister-button"
-              >
-                Login
-              </button>
-            </div>
-          </div>
+            )}
+          </>
         )}
       </div>
     </div>
