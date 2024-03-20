@@ -71,11 +71,13 @@ const Weather = () => {
             setResultbody(true);
           })
           .catch((err) => {
+            setLoad(false);
             alert("enter valid city name");
             console.log(err);
           });
       });
     }
+    setLoad(false);
   }, []);
 
   // location Save

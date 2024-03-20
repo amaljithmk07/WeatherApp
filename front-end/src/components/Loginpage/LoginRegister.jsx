@@ -73,11 +73,11 @@ const LoginRegister = () => {
         });
 
         setTimeout(() => {
-          setLoad(false);
           navigate("/home");
         }, 1000);
       })
       .catch((err) => {
+        setLoad(false);
         console.log(err);
         toast.error(err.response.data.message, {
           position: "bottom-center",
@@ -129,6 +129,7 @@ const LoginRegister = () => {
         }, 1000);
       })
       .catch((err) => {
+        setLoad(false);
         console.log(err);
         toast.error(err.response.data.message, {
           position: "bottom-center",
